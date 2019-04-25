@@ -1,6 +1,13 @@
+const con = require('./config/db');
+
 module.exports = function (app, db) {
-   app.get("/", (req, res, next) => {
-      res.json(["Harry", "My First", 'Server']);
+   app.get("/teams", (req, res, next) => {
+      
+      const queryString = 'SELECT * FROM team'
+      con.query(queryString, function (err, rows, fields) {
+         if (err) return console.log('Error while performing Query.');
+         res.json(rows);
+      });
    });
 
    app.post('/notes', (req, res) => {
