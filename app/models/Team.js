@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
-// Setup schema
 
+// Setup schema
 const kickerSchema = new Schema({
    name: {
       type: String,
@@ -22,6 +22,9 @@ const teamSchema = new Schema({
 });
 
 // Export team model
-const Team = module.exports = mongoose.model('team', teamSchema);
-
+const Team = mongoose.model('team', teamSchema);
 module.exports = Team;
+
+module.exports.get = function (callback, limit) {
+   Team.find(callback).limit(limit);
+};

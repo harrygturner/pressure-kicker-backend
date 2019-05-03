@@ -15,24 +15,24 @@ exports.index = function (req, res) {
       });
    });
 };
+
 // Handle create team actions
-exports.new = function (req, res) {
-   const team = new Team();
-   team.name = team.name;
-   
-   // save the team and check for errors
-   team.save(function (err) {
-      if (err) return res.json(err);
+exports.new = async (req, res) => {
+   try {
+      const team = new Team(req.body);
+      const result = await team.save();
       res.json({
          message: 'New team created!',
-         data: team
+         data: result
       });
-   });
+   } catch (error) {
+      res.status(500).json(error)
+   }
 };
 
 // Handle view team info
 exports.view = function (req, res) {
-   Team.findById(req.params.team_id, function (err, team) {
+   Team.findById(req.params.id, function (err, team) {
       if (err) return res.send(err);
       res.json({
          message: 'Team details loading..',
@@ -44,7 +44,7 @@ exports.view = function (req, res) {
 // Handle delete team
 exports.delete = function (req, res) {
    Team.remove({
-      _id: req.params.team_id
+      _id: req.params.id
    }, function (err, team) {
       if (err) return res.send(err);
       res.json({
