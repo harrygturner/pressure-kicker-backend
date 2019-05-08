@@ -18,11 +18,11 @@ const teamSchema = new Schema({
       type: String,
       required: true
    },
-   kickers: [kickerSchema]
+   kickers: [{ type: Schema.Types.ObjectId, ref: 'Kickers' }]
 });
 
 // Export team model
-const Team = mongoose.model('team', teamSchema);
+const Team = mongoose.model('Team', teamSchema);
 module.exports = Team;
 
 module.exports.get = function (callback, limit) {

@@ -43,7 +43,7 @@ exports.view = function (req, res) {
 
 // Handle delete team
 exports.delete = function (req, res) {
-   Team.remove({
+   Team.deleteOne({
       _id: req.params.id
    }, function (err, team) {
       if (err) return res.send(err);

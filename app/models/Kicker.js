@@ -14,7 +14,7 @@ const kickerSchema = new Schema({
 })
 
 // Export team model
-const Kicker = mongoose.model('kicker', kickerSchema);
+const Kicker = mongoose.model('Kicker', kickerSchema);
 module.exports = Kicker;
 
 module.exports.get = function (callback, limit) {
